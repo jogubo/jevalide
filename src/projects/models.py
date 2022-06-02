@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 
 class Project(models.Model):
 
+    STATUS = [
+        ("PLANNED", "Programmé"),
+        ("IN_PROGRESS", "En Cours"),
+        ("DONE", "Terminé"),
+        ("ARCHIVED", "Archivé"),
+    ]
+
     name = models.CharField(
         max_length=128
     )
@@ -12,6 +19,7 @@ class Project(models.Model):
         blank=True
     )
     deadline = models.DateField()
+    status = models.CharField(max_length=16, choices=STATUS)
     owner = models.ForeignKey(
         User,
         on_delete=models.SET_NULL
